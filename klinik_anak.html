@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Klinik Anak Ceria – Kesehatan Si Kecil, Prioritas Kami</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --sky: #e8f7ff;
+      --mint: #d4f5e9;
+      --coral: #ff6b6b;
+      --teal: #00b4a0;
+      --navy: #1a3a5c;
+      --gold: #ffcc00;
+      --soft-white: #fafcff;
+      --bubble: #fff;
+      --text: #2d3a4a;
+      --subtext: #6b7c93;
+      --shadow: 0 8px 32px rgba(0,180,160,0.10);
+      --radius: 24px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--soft-white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 48px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 2px solid rgba(0,180,160,0.10);
+      box-shadow: 0 2px 24px rgba(0,180,160,0.06);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo .logo-icon {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--teal), #00d4bc);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; box-shadow: 0 4px 12px rgba(0,180,160,0.25);
+    }
+    .nav-logo span {
+      font-size: 1.2rem; font-weight: 900; color: var(--navy);
+      letter-spacing: -0.5px;
+    }
+    .nav-logo span em { color: var(--teal); font-style: normal; }
+    nav ul { display: flex; gap: 32px; list-style: none; }
+    nav ul a {
+      text-decoration: none; color: var(--navy); font-weight: 700;
+      font-size: 0.95rem; transition: color 0.2s;
+      position: relative;
+    }
+    nav ul a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 2px; background: var(--teal); border-radius: 2px;
+      transform: scaleX(0); transition: transform 0.2s;
+    }
+    nav ul a:hover { color: var(--teal); }
+    nav ul a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      background: var(--coral); color: #fff; border: none;
+      padding: 10px 26px; border-radius: 50px; font-weight: 800;
+      font-size: 0.95rem; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(255,107,107,0.30); font-family: 'Nunito', sans-serif;
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,107,0.35); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(150deg, #e8f7ff 0%, #d4f5e9 60%, #fff9e6 100%);
+      display: flex; align-items: center;
+      padding: 120px 48px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-blobs {
+      position: absolute; inset: 0; pointer-events: none;
+    }
+    .blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(60px); opacity: 0.35;
+      animation: float 8s ease-in-out infinite alternate;
+    }
+    .blob-1 { width: 420px; height: 420px; background: #aaeedd; top: -80px; right: -80px; }
+    .blob-2 { width: 300px; height: 300px; background: #ffd6d6; bottom: 40px; left: 10%; animation-delay: -3s; }
+    .blob-3 { width: 200px; height: 200px; background: #ffe9a0; top: 30%; right: 28%; animation-delay: -6s; }
+
+    @keyframes float {
+      from { transform: translateY(0) scale(1); }
+      to   { transform: translateY(-24px) scale(1.04); }
+    }
+
+    .hero-content { max-width: 600px; z-index: 1; animation: slideUp 0.8s ease both; }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff; border: 2px solid rgba(0,180,160,0.2);
+      border-radius: 50px; padding: 6px 16px 6px 10px;
+      font-size: 0.82rem; font-weight: 800; color: var(--teal);
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,180,160,0.10);
+    }
+    .hero-badge .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--teal); animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.4); }
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.5rem);
+      line-height: 1.15; color: var(--navy);
+      margin-bottom: 20px;
+    }
+    h1 span { color: var(--teal); font-style: italic; }
+    .hero-desc {
+      font-size: 1.1rem; color: var(--subtext); line-height: 1.7;
+      margin-bottom: 36px; max-width: 480px;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--teal), #00c4aa);
+      color: #fff; padding: 14px 32px; border-radius: 50px;
+      font-weight: 800; font-size: 1rem; border: none; cursor: pointer;
+      box-shadow: 0 6px 24px rgba(0,180,160,0.30);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,180,160,0.38); }
+    .btn-outline {
+      background: #fff; color: var(--navy); padding: 14px 32px;
+      border-radius: 50px; font-weight: 800; font-size: 1rem;
+      border: 2px solid var(--navy); cursor: pointer;
+      transition: all 0.2s; text-decoration: none; display: inline-block;
+    }
+    .btn-outline:hover { background: var(--navy); color: #fff; }
+
+    .hero-stats {
+      display: flex; gap: 36px; margin-top: 48px; flex-wrap: wrap;
+    }
+    .stat { display: flex; flex-direction: column; }
+    .stat-num { font-size: 2rem; font-weight: 900; color: var(--navy); }
+    .stat-num span { color: var(--teal); }
+    .stat-label { font-size: 0.82rem; color: var(--subtext); font-weight: 700; }
+
+    .hero-visual {
+      position: absolute; right: 48px; bottom: 0;
+      width: 440px; animation: slideUp 0.8s 0.2s ease both;
+    }
+    .hero-visual .card-float {
+      background: #fff; border-radius: 20px;
+      padding: 18px 22px; box-shadow: var(--shadow);
+      display: flex; align-items: center; gap: 14px;
+      position: absolute; animation: floatCard 4s ease-in-out infinite alternate;
+    }
+    .hero-visual .card-float.c1 { top: 60px; right: 0; animation-delay: 0s; }
+    .hero-visual .card-float.c2 { top: 220px; right: 60px; animation-delay: -2s; }
+    .hero-visual .card-float.c3 { top: 380px; right: 20px; animation-delay: -1s; }
+    @keyframes floatCard {
+      from { transform: translateY(0); }
+      to { transform: translateY(-12px); }
+    }
+    .card-icon { font-size: 28px; }
+    .card-text strong { display: block; font-size: 0.95rem; font-weight: 800; color: var(--navy); }
+    .card-text span { font-size: 0.78rem; color: var(--subtext); font-weight: 600; }
+
+    /* ── SECTIONS COMMON ── */
+    section { padding: 96px 48px; }
+    .section-tag {
+      display: inline-block; background: rgba(0,180,160,0.12);
+      color: var(--teal); font-weight: 800; font-size: 0.8rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 50px; margin-bottom: 14px;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--navy); line-height: 1.2; margin-bottom: 16px;
+    }
+    h2 span { color: var(--teal); font-style: italic; }
+    .section-sub { color: var(--subtext); font-size: 1.05rem; line-height: 1.7; max-width: 540px; }
+
+    /* ── LAYANAN ── */
+    #layanan { background: #fff; }
+    .layanan-header { text-align: center; margin-bottom: 56px; }
+    .layanan-header .section-sub { margin: 0 auto; }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .service-card {
+      background: var(--soft-white);
+      border: 2px solid rgba(0,180,160,0.08);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      cursor: default;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 4px; background: linear-gradient(90deg, var(--teal), #00d4bc);
+      transform: scaleX(0); transition: transform 0.3s;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,180,160,0.14); border-color: rgba(0,180,160,0.25); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 60px; height: 60px; border-radius: 18px;
+      background: linear-gradient(135deg, rgba(0,180,160,0.12), rgba(0,212,188,0.06));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; margin-bottom: 20px;
+    }
+    .service-card h3 { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+    .service-card p { font-size: 0.88rem; color: var(--subtext); line-height: 1.65; }
+
+    /* ── DOKTER ── */
+    #dokter { background: linear-gradient(135deg, #f0fbf8, #e8f7ff); }
+    .dokter-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .dokter-text { }
+    .dokter-cards { display: flex; flex-direction: column; gap: 20px; }
+    .dokter-card {
+      background: #fff; border-radius: 20px;
+      padding: 22px 24px; display: flex; align-items: center; gap: 18px;
+      box-shadow: 0 4px 20px rgba(0,180,160,0.08);
+      transition: transform 0.2s;
+    }
+    .dokter-card:hover { transform: translateX(6px); }
+    .dokter-avatar {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal), #00d4bc);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(0,180,160,0.25);
+    }
+    .dokter-info strong { display: block; font-size: 1rem; font-weight: 800; color: var(--navy); }
+    .dokter-info span { font-size: 0.82rem; color: var(--teal); font-weight: 700; }
+    .dokter-info p { font-size: 0.80rem; color: var(--subtext); margin-top: 3px; }
+
+    /* ── JADWAL ── */
+    #jadwal { background: #fff; }
+    .jadwal-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .jadwal-table {
+      background: var(--soft-white); border-radius: var(--radius);
+      overflow: hidden; box-shadow: var(--shadow);
+    }
+    .jadwal-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 28px;
+      border-bottom: 1px solid rgba(0,180,160,0.08);
+    }
+    .jadwal-row:last-child { border-bottom: none; }
+    .jadwal-row:nth-child(even) { background: rgba(0,180,160,0.04); }
+    .jadwal-row .day { font-weight: 800; color: var(--navy); font-size: 0.95rem; }
+    .jadwal-row .hours { font-size: 0.88rem; color: var(--teal); font-weight: 700; }
+    .jadwal-row .status {
+      font-size: 0.75rem; font-weight: 800; padding: 4px 12px;
+      border-radius: 50px;
+    }
+    .status.open { background: rgba(0,180,160,0.12); color: var(--teal); }
+    .status.close { background: rgba(255,107,107,0.12); color: var(--coral); }
+
+    /* ── INFO / CTA STRIP ── */
+    #info {
+      background: linear-gradient(135deg, var(--navy), #1e4a7a);
+      color: #fff; text-align: center; padding: 80px 48px;
+    }
+    #info h2 { color: #fff; }
+    #info h2 span { color: var(--gold); }
+    #info .section-sub { color: rgba(255,255,255,0.72); margin: 0 auto 36px; }
+    .info-cards {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px; margin: 48px 0;
+    }
+    .info-card {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px; padding: 28px 20px; backdrop-filter: blur(8px);
+    }
+    .info-card .ic { font-size: 36px; margin-bottom: 12px; }
+    .info-card strong { display: block; font-size: 1rem; font-weight: 800; margin-bottom: 4px; }
+    .info-card p { font-size: 0.83rem; opacity: 0.72; line-height: 1.5; }
+
+    /* ── KONTAK ── */
+    #kontak { background: var(--soft-white); }
+    .kontak-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-weight: 800; font-size: 0.88rem; color: var(--navy); margin-bottom: 8px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; padding: 13px 18px;
+      border: 2px solid rgba(0,180,160,0.15);
+      border-radius: 14px; font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem; color: var(--text); background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(0,180,160,0.10);
+    }
+    .form-group textarea { min-height: 120px; resize: vertical; }
+    .kontak-info-item {
+      display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px;
+    }
+    .kontak-info-item .ki-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: rgba(0,180,160,0.10); display: flex;
+      align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0;
+    }
+    .kontak-info-item strong { display: block; font-size: 0.88rem; color: var(--subtext); font-weight: 700; }
+    .kontak-info-item p { font-size: 0.95rem; font-weight: 800; color: var(--navy); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy); color: rgba(255,255,255,0.6);
+      text-align: center; padding: 36px 48px;
+      font-size: 0.88rem;
+    }
+    footer strong { color: #fff; }
+
+    /* ── DECORATIVE DIVIDER ── */
+    .wave {
+      width: 100%; overflow: hidden; line-height: 0;
+    }
+    .wave svg { display: block; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav ul { display: none; }
+      nav { padding: 14px 24px; }
+      #hero { padding: 110px 24px 60px; }
+      .hero-visual { display: none; }
+      section { padding: 64px 24px; }
+      .dokter-wrap, .jadwal-wrap, .kontak-wrap { grid-template-columns: 1fr; gap: 36px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="logo-icon">🏥</div>
+    <span>Klinik <em>Anak Ceria</em></span>
+  </div>
+  <ul>
+    <li><a href="#layanan">Layanan</a></li>
+    <li><a href="#dokter">Dokter</a></li>
+    <li><a href="#jadwal">Jadwal</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('kontak').scrollIntoView({behavior:'smooth'})">Buat Janji 📅</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge"><div class="dot"></div> Praktik Setiap Hari</div>
+    <h1>Kesehatan Si Kecil,<br><span>Prioritas Kami</span></h1>
+    <p class="hero-desc">Klinik anak terpercaya dengan dokter spesialis berpengalaman, suasana ramah anak, dan pelayanan hangat untuk tumbuh kembang buah hati Anda.</p>
+    <div class="hero-btns">
+      <a href="#kontak" class="btn-primary">Buat Janji Sekarang ✨</a>
+      <a href="#layanan" class="btn-outline">Lihat Layanan</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">5000<span>+</span></span>
+        <span class="stat-label">Pasien Ditangani</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">8<span>+</span></span>
+        <span class="stat-label">Tahun Pengalaman</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">4.9<span>★</span></span>
+        <span class="stat-label">Rating Kepuasan</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating cards -->
+  <div class="hero-visual">
+    <div class="card-float c1">
+      <div class="card-icon">💉</div>
+      <div class="card-text">
+        <strong>Imunisasi Lengkap</strong>
+        <span>Jadwal & pengingat otomatis</span>
+      </div>
+    </div>
+    <div class="card-float c2">
+      <div class="card-icon">📈</div>
+      <div class="card-text">
+        <strong>Pantau Tumbuh Kembang</strong>
+        <span>Grafik tinggi & berat badan</span>
+      </div>
+    </div>
+    <div class="card-float c3">
+      <div class="card-icon">🩺</div>
+      <div class="card-text">
+        <strong>Konsultasi 24 Jam</strong>
+        <span>Via WhatsApp & telepon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAYANAN -->
+<section id="layanan">
+  <div class="layanan-header">
+    <div class="section-tag">✦ Layanan Kami</div>
+    <h2>Semua yang Si Kecil<br><span>Butuhkan</span>, Ada di Sini</h2>
+    <p class="section-sub">Kami menyediakan layanan kesehatan anak yang komprehensif dengan peralatan modern dan dokter berpengalaman.</p>
+  </div>
+  <div class="cards-grid">
+    <div class="service-card">
+      <div class="service-icon">🩺</div>
+      <h3>Pemeriksaan Umum</h3>
+      <p>Pemeriksaan kesehatan rutin, deteksi dini penyakit, dan konsultasi tumbuh kembang anak secara menyeluruh.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💉</div>
+      <h3>Imunisasi</h3>
+      <p>Program vaksinasi lengkap sesuai jadwal Kemenkes: BCG, Hepatitis, DPT, Polio, Campak, dan lainnya.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📊</div>
+      <h3>Tumbuh Kembang</h3>
+      <p>Monitoring berat badan, tinggi badan, lingkar kepala, dan perkembangan motorik serta kognitif anak.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🫁</div>
+      <h3>ISPA & Alergi</h3>
+      <p>Penanganan infeksi saluran napas, asma, rhinitis alergi, dan kondisi pernapasan pada bayi & anak.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🍼</div>
+      <h3>Konsultasi ASI & MPASI</h3>
+      <p>Panduan laktasi, solusi masalah menyusui, dan panduan Makanan Pendamping ASI yang tepat dan bergizi.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧠</div>
+      <h3>Deteksi Dini Autism</h3>
+      <p>Skrining perkembangan sosial, komunikasi, dan perilaku anak dengan metode M-CHAT yang terstandar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DOKTER -->
+<section id="dokter">
+  <div class="dokter-wrap">
+    <div class="dokter-text">
+      <div class="section-tag">✦ Tim Dokter</div>
+      <h2>Dokter Kami<br><span>Berpengalaman</span><br>& Bersahabat</h2>
+      <p class="section-sub" style="margin-bottom:28px">Tim dokter spesialis anak kami telah menangani ribuan pasien dengan penuh cinta dan dedikasi tinggi.</p>
+      <a href="#kontak" class="btn-primary" style="font-size:0.9rem; padding:12px 26px">Konsultasi Sekarang 💬</a>
+    </div>
+    <div class="dokter-cards">
+      <div class="dokter-card">
+        <div class="dokter-avatar">👨‍⚕️</div>
+        <div class="dokter-info">
+          <strong>dr. Budi Santoso, Sp.A</strong>
+          <span>Spesialis Anak – Konsultan Neonatologi</span>
+          <p>15 tahun pengalaman · Lulusan FKUI</p>
+        </div>
+      </div>
+      <div class="dokter-card">
+        <div class="dokter-avatar">👩‍⚕️</div>
+        <div class="dokter-info">
+          <strong>dr. Sari Dewi, Sp.A (K)</strong>
+          <span>Spesialis Anak – Konsultan Alergi & Imunologi</span>
+          <p>12 tahun pengalaman · Lulusan FK UNAIR</p>
+        </div>
+      </div>
+      <div class="dokter-card">
+        <div class="dokter-avatar">👨‍⚕️</div>
+        <div class="dokter-info">
+          <strong>dr. Rizal Hakim, Sp.A</strong>
+          <span>Spesialis Anak – Tumbuh Kembang & Pediatri Sosial</span>
+          <p>9 tahun pengalaman · Lulusan FK UGM</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JADWAL -->
+<section id="jadwal">
+  <div class="jadwal-wrap">
+    <div>
+      <div class="section-tag">✦ Jadwal Praktik</div>
+      <h2>Kami Siap<br><span>Melayani</span> Anda</h2>
+      <p class="section-sub" style="margin-bottom:28px">Jadwal praktik dokter kami tersedia hampir setiap hari. Segera buat janji agar tidak perlu menunggu lama.</p>
+      <div class="kontak-info-item">
+        <div class="ki-icon">📞</div>
+        <div>
+          <strong>Telepon & WhatsApp</strong>
+          <p>(0361) 123-4567 / 0812-3456-7890</p>
+        </div>
+      </div>
+      <div class="kontak-info-item">
+        <div class="ki-icon">📍</div>
+        <div>
+          <strong>Alamat Klinik</strong>
+          <p>Jl. Teuku Umar No. 88, Denpasar, Bali 80114</p>
+        </div>
+      </div>
+    </div>
+    <div class="jadwal-table">
+      <div class="jadwal-row">
+        <span class="day">Senin</span>
+        <span class="hours">08:00 – 20:00</span>
+        <span class="status open">Buka</span>
+      </div>
+      <div class="jadwal-row">
+        <span class="day">Selasa</span>
+        <span class="hours">08:00 – 20:00</span>
+        <span class="status open">Buka</span>
+      </div>
+      <div class="jadwal-row">
+        <span class="day">Rabu</span>
+        <span class="hours">08:00 – 20:00</span>
+        <span class="status open">Buka</span>
+      </div>
+      <div class="jadwal-row">
+        <span class="day">Kamis</span>
+        <span class="hours">08:00 – 20:00</span>
+        <span class="status open">Buka</span>
+      </div>
+      <div class="jadwal-row">
+        <span class="day">Jumat</span>
+        <span class="hours">08:00 – 20:00</span>
+        <span class="status open">Buka</span>
+      </div>
+      <div class="jadwal-row">
+        <span class="day">Sabtu</span>
+        <span class="hours">08:00 – 17:00</span>
+        <span class="status open">Buka</span>
+      </div>
+      <div class="jadwal-row">
+        <span class="day">Minggu</span>
+        <span class="hours">09:00 – 14:00</span>
+        <span class="status open">Buka</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO STRIP -->
+<section id="info">
+  <div class="section-tag" style="background:rgba(255,204,0,0.15);color:var(--gold)">✦ Mengapa Kami</div>
+  <h2>Dipercaya Ribuan<br><span>Keluarga</span> di Bali</h2>
+  <p class="section-sub">Kami berkomitmen memberikan pelayanan terbaik dengan standar medis tinggi dan pendekatan yang hangat.</p>
+  <div class="info-cards">
+    <div class="info-card">
+      <div class="ic">🏆</div>
+      <strong>Bersertifikat Resmi</strong>
+      <p>Terakreditasi Kemenkes RI dengan standar pelayanan klinik pratama</p>
+    </div>
+    <div class="info-card">
+      <div class="ic">🎨</div>
+      <strong>Suasana Ramah Anak</strong>
+      <p>Ruang tunggu menyenangkan dengan pojok bermain agar si kecil nyaman</p>
+    </div>
+    <div class="info-card">
+      <div class="ic">💳</div>
+      <strong>Terima BPJS & Umum</strong>
+      <p>Melayani pasien BPJS, asuransi swasta, dan pembayaran umum</p>
+    </div>
+    <div class="info-card">
+      <div class="ic">🚑</div>
+      <strong>Darurat 24 Jam</strong>
+      <p>Hotline konsultasi darurat tersedia 24 jam via WhatsApp</p>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section id="kontak">
+  <div class="kontak-wrap">
+    <div>
+      <div class="section-tag">✦ Hubungi Kami</div>
+      <h2>Buat <span>Janji</span><br>dengan Mudah</h2>
+      <p class="section-sub" style="margin-bottom:36px">Isi formulir di samping atau hubungi kami langsung. Tim kami akan segera menghubungi Anda untuk konfirmasi jadwal.</p>
+      <div class="kontak-info-item">
+        <div class="ki-icon">📞</div>
+        <div>
+          <strong>Telepon</strong>
+          <p>(0361) 123-4567</p>
+        </div>
+      </div>
+      <div class="kontak-info-item">
+        <div class="ki-icon">💬</div>
+        <div>
+          <strong>WhatsApp</strong>
+          <p>0812-3456-7890</p>
+        </div>
+      </div>
+      <div class="kontak-info-item">
+        <div class="ki-icon">📧</div>
+        <div>
+          <strong>Email</strong>
+          <p>info@klinikanakceria.com</p>
+        </div>
+      </div>
+      <div class="kontak-info-item">
+        <div class="ki-icon">📍</div>
+        <div>
+          <strong>Alamat</strong>
+          <p>Jl. Teuku Umar No. 88, Denpasar, Bali 80114</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="background:#fff; border-radius:var(--radius); padding:36px; box-shadow:var(--shadow)">
+        <h3 style="font-size:1.2rem; font-weight:900; color:var(--navy); margin-bottom:24px">📋 Form Pendaftaran</h3>
+        <div class="form-group">
+          <label>Nama Orang Tua / Wali</label>
+          <input type="text" placeholder="Nama lengkap"/>
+        </div>
+        <div class="form-group">
+          <label>Nama Pasien (Anak)</label>
+          <input type="text" placeholder="Nama lengkap anak"/>
+        </div>
+        <div class="form-group">
+          <label>Nomor WhatsApp</label>
+          <input type="tel" placeholder="08xx-xxxx-xxxx"/>
+        </div>
+        <div class="form-group">
+          <label>Layanan yang Dibutuhkan</label>
+          <select>
+            <option value="">-- Pilih layanan --</option>
+            <option>Pemeriksaan Umum</option>
+            <option>Imunisasi</option>
+            <option>Konsultasi Tumbuh Kembang</option>
+            <option>ISPA & Alergi</option>
+            <option>Konsultasi ASI & MPASI</option>
+            <option>Deteksi Dini Autism</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tanggal Kunjungan</label>
+          <input type="date"/>
+        </div>
+        <div class="form-group">
+          <label>Keluhan / Catatan (opsional)</label>
+          <textarea placeholder="Ceritakan keluhan atau pertanyaan Anda..."></textarea>
+        </div>
+        <button class="btn-primary" style="width:100%; text-align:center; justify-content:center" onclick="alert('Terima kasih! Kami akan menghubungi Anda segera untuk konfirmasi jadwal. 😊')">
+          Kirim & Buat Janji ✨
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <strong>Klinik Anak Ceria</strong> – Denpasar, Bali. Semua hak dilindungi.<br>
+  Dibuat dengan ❤️ untuk kesehatan si kecil.</p>
+</footer>
+
+</body>
+</html>
